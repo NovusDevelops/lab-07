@@ -3,10 +3,9 @@
 for i in {1..4}; do
     # get the input folder
   input_dir="Testcase$i" 
-  output_dir="${Output}Diff"
+  output_dir="${input_dir}Diff"
 
-  mkdir -p "$output_dir"  # ensure existence
-  rm -rf "$output_dir"/*  # clear from prior runs incase
+  rm -rf "$output_dir"  # clear from prior runs incase
 
   # loop through all the files
   for file_1 in "$input_dir"/*.1.txt; do
@@ -14,9 +13,11 @@ for i in {1..4}; do
     [ -f "$file_2" ] || continue  # skip if 2nd txt is missing
 
     if ! cmp -s "$file_1" "$file_2"; then
+    
       # files differ create a diff file
-      version="${file_1%.1.txt
-
+      mkdir -p "$output_dir"
+      version="${file_1%.1.txt}"
+      
       diff_file="$output_dir/${version}Diff.txt"
       diff "$file_1" "$file_2" > "$diff_file"
     fi
