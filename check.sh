@@ -4,7 +4,9 @@ for i in {1..4}; do
   # get the input folder
   input_dir="Testcase$i" 
   diff_dir="${input_dir}Diff"
+  
   passed=1
+  has_diff=0
 
   # loop through all the files
   for file_1 in "$input_dir"/*.1.txt; do
@@ -15,7 +17,7 @@ for i in {1..4}; do
     diff_file="$diff_dir/${version}Diff.txt"
 
     if ! cmp -s "$file_1" "$file_2"; then
-    
+      has_diff=1  # update has_diff to indicate that there is a difference
       # files differ make sure dif_folder exist
       if [ ! -d "$diff_dir" ]; then  # doesn't exist diff folder
         passed=0
@@ -36,6 +38,11 @@ for i in {1..4}; do
       fi
     fi
   done
+
+  # make sure diff_dir doesn't exist if there are no differences
+  if [ $has_diff -eq 1 ] && [ ! -d "$diff_dir" ]; then
+    passed=0
+  fi
 
   if [ $passed -eq 1 ]; then
     echo "Testcase$i: PASS"
