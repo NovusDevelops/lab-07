@@ -21,8 +21,5 @@ for i in {1..4}; do
       diff_file="$output_dir/${version}Diff.txt"
       diff -u "$file_1" "$file_2" > "$diff_file"
     fi
-  done
-  
-
-  
+  done  
 done
