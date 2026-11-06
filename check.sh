@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+all_passed=1
 
 for i in {1..4}; do
   # get the input folder
@@ -48,5 +49,13 @@ for i in {1..4}; do
     echo "Testcase$i: PASS"
   else
     echo "Testcase$i: FAIL"
+    all_passed=0
   fi  
 done
+
+# exit error or success based on whether all test cases passed
+if [ "$all_passed" -eq 0 ]; then
+    exit 1  # fail
+else
+    exit 0
+fi
