@@ -23,10 +23,10 @@ for i in {1..4}; do
       elif [ ! -f "$diff_file" ]; then  # diff file doesnt exist
         passed=0
         break
-      else
-        # diff file exist, check if it is correct
-        # How?
-        fi
+      # check diff file to make sure it is correct
+      elif ! cmp -s <(diff -u "$file_1" "$file_2" | tail -n +3) <(tail -n +3 "$diff_file"); then
+        passed=0
+        break
       fi
     else
       # files are the same, make sure diff file doesn't exist
