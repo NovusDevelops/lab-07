@@ -40,7 +40,7 @@ for i in {1..4}; do
   done
 
   # make sure diff_dir doesn't exist if there are no differences
-  if [ $has_diff -eq 1 ] && [ -d "$diff_dir" ]; then
+  if [ $has_diff -eq 0 ] && [ -d "$diff_dir" ]; then
     passed=0
   fi
 
