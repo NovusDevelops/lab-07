@@ -16,10 +16,10 @@ for i in {1..4}; do
     
       # files differ create a diff file
       mkdir -p "$output_dir"
-      version="${file_1%.1.txt}"
-      
+      version=$(basename "$file_1" .1.txt)
+
       diff_file="$output_dir/${version}Diff.txt"
-      diff "$file_1" "$file_2" > "$diff_file"
+      diff -u "$file_1" "$file_2" > "$diff_file"
     fi
   done
   
