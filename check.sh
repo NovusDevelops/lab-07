@@ -38,8 +38,8 @@ for i in {1..4}; do
   done
 
   if [ $passed -eq 1 ]; then
-    echo "Testcase$i: Passes"
+    echo "Testcase$i: PASS"
   else
-    echo "Testcase$i: Fails"
+    echo "Testcase$i: FAIL"
   fi  
 done
